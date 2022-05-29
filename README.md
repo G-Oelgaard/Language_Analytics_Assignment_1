@@ -1,39 +1,45 @@
 # Language_Analytics_Assignment_1
 ## ------ SCRIPT DESCRIPTION ------
-This repository contains a script that takes a user-defined image and findes the three closest images based on difference in histograms.
+This repository contains a script that takes a user-defined text, search term and window size, and then finds the all collocates in the window + their MI-score.
 
 The model will:
-- print the names of the three closest images in the console.
-- create a .csv with the image names of the three closest images
-- A .jpg plot of the target image and the three closest images + their hist scores.
+1. Load a user defined text.
+2. Tokenize and normalize the text.
+3. Count how many times the collocates appear in the designated window and the whole text.
+4. Calculate the collocates MI-score
+5. Save a .csv file with the information from point 3. and 4. 
 
 ## ------ METHODS ------
-To compare the histograms of images the functions imread, cvtColor, calcHist, normalize and compareHist from the cv2 package are used. Especially "compareHist" is essential when we want to compare two histograms.
-
-To calculate the distances from our target image while still retaining our image_id and image_data, the code effectively creates a list within a list. Then to find the top 3 closest images, we sort the lists by their image_score.
 
 ## ------ DATA ------
-The data is a large collection of flower images provided through the course.
+The data used in the creation and testing of the model was a large collection of english models in .txt format.
+
+The data can be found here: https://github.com/computationalstylistics/100_english_novels
 
 ## ------ REPO STRUCTURE ------
 "src" FOLDER:
-- This folder contains the .py script to find the closest image based on histogram and create plot + .csv
+- This folder contains the collocation .py script.
 
 "in" FOLDER:
-- This is where the data used in the scripts should be placed. Ie. where the flowers should be placed in a folder called "flowers".
+- This is where the data used in the scripts should be placed. Ie. where the '.txt' files used should be placd.
 
 "out" FOLDER:
-- This is where the .csv and image plot will be saved
+- This is where the .csv will be saved.
 
 "utils" FOLDER:
-- This folder should include all utility scripts used by the main script.
+- This folder should include all utility scripts used by the main script. In this case none.
 
 ## ------ SCRIPT USAGE ------
-- The model_creation.py script requires you to give the arguments "-i" / "--image" (the name of the user-defined image. Don't include .jpg)
+### Arguments
 
-- The poster_prediction.py script requires you to give the argument "-c" / "--csv" (the name of the csv created by the script. Don't include .csv)
-
-- The poster_prediction.py script requires you to give the argument "-p" / "--plot" (the name of the image plot file created by the script)
+**Required**
+Argument         | What it specifies / does
+---------------- | -------------------------
+"-k" / "--keyword" | The keyword / search term you want to use.
+"-t" / "--text" | The text you want to use. Remember to include '.txt'.
+"-w" / "--window_size" | The collocates window size you want to use.
 
 ## ------ RESULTS ------
-The model achieves what it sets out to do. However, we might quickly run into problems if the script is used to find similar images in the eyes of a human. That is because while the histograms (in other words the color concentrations and values) of the images might be similar, what the images actually depict might not be. That is why finding similar images is probably better achieved using something like feature extraction and the nearest_neighbor function from sklearn.
+The model achieves what it sets out to do. It is also surprisingly fast!
+
+It should be noted that a single instance of a collocate appearing three times in the windows, but only once in the whole text, occurred. This could mean that the word was surrounded by keywords.
