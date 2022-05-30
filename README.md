@@ -9,8 +9,6 @@ The model will:
 4. Calculate the collocates MI-score
 5. Save a .csv file with the information from point 3. and 4. 
 
-## ------ METHODS ------
-
 ## ------ DATA ------
 The data used in the creation and testing of the model was a large collection of english models in .txt format.
 
